@@ -1,1 +1,57 @@
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool isBin(string inValue) {
+    return inValue.find_first_not_of("01") == string::npos;
+}
+bool isHex(string inValue) {
+    return inValue.find_first_not_of("0123456789ABCDEF") == string::npos;
+}
+int value(string inValuePos) {
+    if (inValuePos == "A") return 10;
+    else if (inValuePos == "B") return 11;
+        return stoi(inValuePos);
+
+}
+int main()
+{
+    string inValue;
+    int base1, decValue, tempValue, outValue = 0, powerBase = 1;
+
+    cout << "Please enter a number: ";
+    cin >> inValue;
+    cout << "Please enter the base: ";
+    cin >> base1;
+    //FOR i length of inValue to 0
+    //  Set decValue = inValue[i] and calculate the value
+    //  outValue = outValue + digit * base
+    //  powerBase = powerBase * base1
+    // if base1 2 isBIN else if 3-9 isDec() else isHex()
+    if (isHex(inValue)) {
+        for (int i = inValue.length() - 1; i >= 0; i--) {
+            decValue = value(inValue.substr(i, 1));
+            outValue += decValue * powerBase;
+            powerBase *= base1;
+        }
+        cout << inValue << " converted to base " << base1 << " is " << outValue;
+    }
+    /*
+    if (isBin(inValue)) {
+        decValue = stoi(inValue);
+        while (decValue > 0) {
+            tempValue = decValue % 10;
+            outValue = outValue + tempValue * powerBase;
+            powerBase = powerBase * base1;
+            decValue = decValue / 10;
+
+        }
+        cout << inValue << " converted to base " << base1 << " is " << outValue;
+    }
+    else
+        cout << "The number is invalid\n";
+    */
+}
+
+
